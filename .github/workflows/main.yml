@@ -1,33 +1,35 @@
 name: Build Geode Mod
 
 on:
-workflow_dispatch:
-push:
-branches:
-- “**”
-tags:
-- “v*”
+  workflow_dispatch:
+  push:
+    branches:
+      - "**"
+    tags:
+      - "v*"
 
 permissions:
-contents: read
+  contents: read
 
 jobs:
-build:
-name: Build for iOS
-runs-on: macos-15
+  build:
+    name: Build for iOS
+    runs-on: macos-15
 
-steps:
-  - name: Checkout repository
-    uses: actions/checkout@v4
-  - name: Build the mod
-    id: build
-    uses: geode-sdk/build-geode-mod@main
-    with:
-      target: iOS
-      sdk: latest
-  - name: Upload iOS build
-    uses: actions/upload-artifact@v4
-    with:
-      name: Input-Buff-iOS
-      path: ${{ steps.build.outputs.build-output }}
-      if-no-files-found: error
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build the mod
+        id: build
+        uses: geode-sdk/build-geode-mod@main
+        with:
+          target: iOS
+          sdk: latest
+
+      - name: Upload iOS build
+        uses: actions/upload-artifact@v4
+        with:
+          name: Input-Buff-iOS
+          path: ${{ steps.build.outputs.build-output }}
+          if-no-files-found: error
