@@ -1,2 +1,2 @@
 # Input-buff
-By:lukai
+First mod for ios input buffer
