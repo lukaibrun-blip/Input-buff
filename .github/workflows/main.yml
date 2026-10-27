@@ -4,23 +4,25 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - "**"
+    tags:
+      - "v*"
 
 jobs:
   build:
-    name: iOS Build
-    runs-on: macos-latest
+    name: Build for iOS
+    runs-on: macos-13  # Usando macos-13 que costuma ter menos fila que o latest
+
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build Geode Mod
+      - name: Build the mod
         uses: geode-sdk/build-geode-mod@main
         id: build
         with:
           target: iOS
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
-          name: Input-buff-iOS
+          name: Build-Output-iOS
           path: ${{ steps.build.outputs.build-output }}
