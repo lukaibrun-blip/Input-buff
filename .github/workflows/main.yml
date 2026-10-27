@@ -8,12 +8,10 @@ on:
 
 jobs:
   build:
-    name: Build iOS Mod
+    name: iOS Build
     runs-on: macos-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Build Geode Mod
         uses: geode-sdk/build-geode-mod@main
