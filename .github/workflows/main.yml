@@ -8,13 +8,17 @@ on:
     tags:
       - "v*"
 
+permissions:
+  contents: read
+
 jobs:
   build:
     name: Build for iOS
-    runs-on: macos-13  # Usando macos-13 que costuma ter menos fila que o latest
+    runs-on: macos-15
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Build the mod
         uses: geode-sdk/build-geode-mod@main
@@ -22,7 +26,9 @@ jobs:
         with:
           target: iOS
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload iOS build
+        uses: actions/upload-artifact@v4
         with:
-          name: Build-Output-iOS
+          name: Input-Buff-iOS
           path: ${{ steps.build.outputs.build-output }}
+          if-no-files-found: error
