@@ -15,17 +15,17 @@ jobs:
     timeout-minutes: 45
     steps:
       - name: Check out source
-        uses: actions/checkout@v7
+        uses: actions/checkout@v4
 
       - name: Build with Geode
         id: build
         uses: geode-sdk/build-geode-mod@main
         with:
-          sdk: given
-          target: iOS
+          sdk: 'main'
+          target: ios
 
       - name: Upload iOS .geode
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v4
         with:
           name: afterflow-ios
           path: ${{ steps.build.outputs.build-output }}/*.geode
